@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVerse — Your Gateway to Cinema</title>
+  <meta name="description" content="Discover, review, and celebrate the films that move us. CineVerse is your cinematic destination." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="inner">
+      <button class="logo" onclick="scrollTo('#home')">CINEVERSE</button>
+      <ul class="nav-links">
+        <li><button class="active" onclick="scrollTo('#home')">Home</button></li>
+        <li><button onclick="scrollTo('#gallery')">Gallery</button></li>
+        <li><button onclick="scrollTo('#reviews')">Reviews</button></li>
+        <li><button onclick="scrollTo('#genres')">Genres</button></li>
+        <li><button onclick="scrollTo('#contact')">Contact</button></li>
+      </ul>
+      <button class="hamburger" onclick="toggleMobile()">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <button onclick="scrollTo('#home')">Home</button>
+      <button onclick="scrollTo('#gallery')">Gallery</button>
+      <button onclick="scrollTo('#reviews')">Reviews</button>
+      <button onclick="scrollTo('#genres')">Genres</button>
+      <button onclick="scrollTo('#contact')">Contact</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1920&h=800&fit=crop" alt="Cinematic theater" />
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>CINE<span class="text-gradient-red">VERSE</span></h1>
+      <p class="subtitle">Your gateway to the world of cinema. Discover, review, and celebrate the films that move us.</p>
+      <div class="btns">
+        <button class="btn-primary glow-red" onclick="scrollTo('#gallery')">Explore Movies</button>
+        <button class="btn-outline-gold" onclick="scrollTo('#reviews')">Top Rated Films</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section class="section">
+      <h2 class="section-title">The Magic of <span class="text-gradient-gold">Cinema</span></h2>
+      <hr style="border:none;border-top:1px solid var(--border);margin:1.5rem 0" />
+      <div class="about-grid">
+        <div>
+          <p>Movies are more than entertainment — they are <strong>windows into other worlds</strong>, mirrors of our humanity, and bridges between cultures. From the golden age of Hollywood to the streaming revolution, cinema continues to <em>shape how we see the world</em>.</p>
+          <p style="margin-top:1rem">At CineVerse, we celebrate every frame, score, and performance. Whether you love mind-bending <mark>Sci-Fi</mark> epics or edge-of-your-seat thrillers, you'll find your next favorite film here.</p>
+        </div>
+        <div>
+          <h3>Top 3 Favorite Movies</h3>
+          <ol><li>Interstellar</li><li>Inception</li><li>Avengers: Endgame</li></ol>
+          <h3 style="margin-top:1.5rem">Favorite Genres</h3>
+          <ul><li>Sci-Fi</li><li>Action</li><li>Thriller</li><li>Drama</li></ul>
+        </div>
+      </div>
+
+      <blockquote class="blockquote-accent">
+        <p>"Why do we fall, sir? So that we can learn to pick ourselves up."</p>
+        <cite>— Batman Begins (2005)</cite>
+      </blockquote>
+
+      <div class="term-card">
+        <h3>Film Terminology</h3>
+        <dl>
+          <dt><abbr title="The person who oversees the creative aspects of a film">Director</abbr></dt>
+          <dd>The creative visionary responsible for translating a screenplay into a visual narrative on screen.</dd>
+          <dt>Cinematography</dt>
+          <dd>The art and science of visual storytelling in film through lighting, framing, and camera movement.</dd>
+          <dt><abbr title="Computer Generated Imagery">CGI</abbr></dt>
+          <dd>Computer-generated imagery used to create visual effects that would be impractical to achieve in live action.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section-wide" id="gallery">
+      <h2 class="section-title">Movie <span class="text-gradient-red">Gallery</span></h2>
+      <p style="margin-top:.5rem;color:var(--muted)">Click any movie to discover more details.</p>
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="show-more-wrap">
+        <button class="btn-secondary" id="showMoreBtn" onclick="toggleShowMore()">Show More Movies</button>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="section" id="reviews">
+      <h2 class="section-title">Movie <span class="text-gradient-gold">Reviews</span></h2>
+      <div class="review-form">
+        <h3>Write a Review</h3>
+        <div id="formMsg"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reviewName">Your Name</label>
+            <input type="text" id="reviewName" placeholder="Enter your name" />
+          </div>
+          <div class="form-group">
+            <label>Rating</label>
+            <div class="stars-interactive" id="starPicker"></div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:1rem">
+          <label for="reviewComment">Your Review <span id="charCount" style="font-size:.75rem">(0/300)</span></label>
+          <textarea id="reviewComment" rows="4" placeholder="Share your thoughts on a movie..." maxlength="300"></textarea>
+        </div>
+        <button class="btn-primary" style="margin-top:1rem" onclick="submitReview()">Submit Review</button>
+      </div>
+      <div class="review-list" id="reviewList"></div>
+    </section>
+
+    <!-- GENRES / ASIDE -->
+    <section class="aside-section" id="genres">
+      <div class="aside-grid">
+        <div>
+          <h2><span class="text-gradient-red">Genres</span></h2>
+          <div class="genre-tags" id="genreTags"></div>
+        </div>
+        <aside>
+          <h2><span class="text-gradient-gold">Upcoming</span></h2>
+          <ul class="upcoming-list">
+            <li class="upcoming-item"><span>Dune: Part Three</span><span>2027</span></li>
+            <li class="upcoming-item"><span>Avatar 3</span><span>2025</span></li>
+            <li class="upcoming-item"><span>The Batman: Part II</span><span>2027</span></li>
+          </ul>
+        </aside>
+        <aside>
+          <h2>Fun <span class="text-gradient-red">Trivia</span></h2>
+          <ul class="trivia-list">
+            <li class="trivia-item">🎬 The longest movie ever made is <strong>Logistics</strong> at 857 hours.</li>
+            <li class="trivia-item">🏆 <strong>Walt Disney</strong> holds the record for most Oscars — 22 wins.</li>
+            <li class="trivia-item">🎭 The word "cinema" comes from the Greek <em>kinema</em>, meaning movement.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h3>CINEVERSE</h3>
+          <p style="margin-top:.5rem">Your gateway to cinematic discovery. Celebrating the art of film since 2024.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><button onclick="scrollTo('#home')">Home</button></li>
+            <li><button onclick="scrollTo('#gallery')">Gallery</button></li>
+            <li><button onclick="scrollTo('#reviews')">Reviews</button></li>
+            <li><button onclick="scrollTo('#genres')">Genres</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <div class="footer-social">
+            <span>Twitter</span><span>GitHub</span><span>YouTube</span>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> CineVerse. All rights reserved.</p>
+        <p>Designed with 🎬 by CineVerse Team</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="movieModal" style="display:none" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
